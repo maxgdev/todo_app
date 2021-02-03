@@ -29,19 +29,27 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  final todos = [
+    'Wash Car',
+    'Empty Recycling',
+    'Pay Car Insurance',
+    'Call plumbers',
+    'Get quote for office shed',
+    'Get haircut',
+    'Call family',
+    'Watch Mandalorian',
+  ];
 
-  void _incrementCounter() {
+  void addItem() {
     setState(() {
-      _counter++;
+      todos.add('Added new todo onPressed');
     });
   }
 
   @override
   Widget build(BuildContext context) {
-
     // Generate some dummy list for ListView
-    final todos = List<String>.generate(10, (i) => "ToDo items $i");
+    // final todos = List<String>.generate(10, (i) => "ToDo items $i");
     print(todos);
 
     final todoListView = ListView.builder(
@@ -54,19 +62,18 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Text('${todos[index]}'),
         );
       },
+
     );
 
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
       body: Container(
-            child: todoListView,
+        child: todoListView,
       ),
       floatingActionButton: FloatingActionButton(
-        // onPressed: ,
+        onPressed: addItem,
         tooltip: 'Add ToDo',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
