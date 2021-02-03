@@ -39,7 +39,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final todos = List<String>.generate(5, (i) => "ToDo items $i");
+
+    // Generate some dummy list for ListView
+    final todos = List<String>.generate(10, (i) => "ToDo items $i");
     print(todos);
 
     final todoListView = ListView.builder(
@@ -48,6 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
       itemCount: todos.length,
       itemBuilder: (context, index) {
         return ListTile(
+          leading: Icon(Icons.check_box_outline_blank),
           title: Text('${todos[index]}'),
         );
       },
@@ -59,41 +62,12 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'List of ToDos',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            todoListView,
-          ],
-        ),
+      body: Container(
+            child: todoListView,
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
+        // onPressed: ,
+        tooltip: 'Add ToDo',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
