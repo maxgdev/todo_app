@@ -58,28 +58,25 @@ class _MyHomePageState extends State<MyHomePage> {
       itemCount: todos.length,
       itemBuilder: (context, index) {
         final todo = todos[index];
-        // return ListTile(
-        //   leading: Icon(Icons.check_box_outline_blank),
-        //   title: Text('$todo'),
-        // );
-            return Dismissible(
-              key: Key(todo),
-              onDismissed: (direction) {
-                setState(() {
-                  todos.removeAt(index);
-                });
-                // Then show a snackbar.
-                Scaffold.of(context)
-                    .showSnackBar(SnackBar(content: Text("$todo dismissed")));
-              },
-              // Show a red background as the item is swiped away.
-              background: Container(color: Colors.red),
-              child: ListTile(
-                leading: Icon(Icons.check_box_outline_blank),
-                title: Text('$todo'),
-              ),
-            );
+        return Dismissible(
+          key: Key(todo),
+          onDismissed: (direction) {
+            setState(() {
+              todos.removeAt(index);
+            });
+            // Then show a snackbar.
+            Scaffold.of(context)
+                .showSnackBar(SnackBar(content: Text("$todo dismissed")));
           },
+          // Show a red background as the item is swiped away.
+          background: Container(color: Colors.red),
+          child: ListTile(
+            leading: Icon(Icons.check_box_outline_blank),
+            title: Text('$todo'),
+            trailing: Icon(Icons.edit),
+          ),
+        );
+      },
     );
 
     return Scaffold(
