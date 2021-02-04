@@ -31,7 +31,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final _isTicked = true;
+  bool _isTicked = true;
   final todos = [
     'Wash Car',
     'Empty Recycling',
@@ -48,6 +48,14 @@ class _MyHomePageState extends State<MyHomePage> {
       todos.add(toDoController.text);
     });
   }
+
+  // toggle todo checkbox
+  void toggleToDo() {
+    setState(() {
+      _isTicked = !_isTicked;
+    });
+  }
+
   // toDoController for text input forms
   final toDoController = TextEditingController();
   // toDoController cleanup
@@ -83,9 +91,17 @@ class _MyHomePageState extends State<MyHomePage> {
           // Show a red background as the item is swiped away.
           background: Container(color: Colors.red),
           child: ListTile(
-            leading: (_isTicked
-                ? Icon(Icons.check_box)
-                : Icon(Icons.check_box_outline_blank)),
+            leading: IconButton(
+                icon: (_isTicked
+                    ? Icon(Icons.check_box)
+                    : Icon(Icons.check_box_outline_blank)),
+                onPressed: () => {
+                  print('icon button pressed'),
+                  toggleToDo()
+                  }),
+            // leading: (_isTicked
+            //     ? Icon(Icons.check_box)
+            //     : Icon(Icons.check_box_outline_blank)),
             title: Text('$todo'),
             trailing: Icon(Icons.edit),
           ),
