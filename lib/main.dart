@@ -115,7 +115,9 @@ class _MyHomePageState extends State<MyHomePage> {
               '$todo',
               style: getTextStyle(_isTicked),
             ),
-            trailing: Icon(Icons.edit),
+            trailing: IconButton(
+                icon: Icon(Icons.edit),
+                onPressed: () => {print('Edit icon button pressed') }),
           ),
         );
       },
