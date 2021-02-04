@@ -45,8 +45,17 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void addItem() {
     setState(() {
-      todos.add('Added new todo onPressed');
+      todos.add(toDoController.text);
     });
+  }
+  // toDoController for text input forms
+  final toDoController = TextEditingController();
+  // toDoController cleanup
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    toDoController.dispose();
+    super.dispose();
   }
 
   @override
@@ -105,6 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
         builder: (_) => AlertDialog(
               title: Text("ToDo Item"),
               content: TextField(
+                controller: toDoController,
                 autofocus: true,
                 decoration: InputDecoration(
                     border: InputBorder.none, hintText: 'Enter ToDo item'),
