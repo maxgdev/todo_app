@@ -1,3 +1,5 @@
+// ToDo App
+// import 'dart:html';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -29,6 +31,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final _isTicked = true;
   final todos = [
     'Wash Car',
     'Empty Recycling',
@@ -66,12 +69,14 @@ class _MyHomePageState extends State<MyHomePage> {
             });
             // Then show a snackbar.
             Scaffold.of(context)
-                .showSnackBar(SnackBar(content: Text("$todo dismissed")));
+                .showSnackBar(SnackBar(content: Text("$todo deleted!")));
           },
           // Show a red background as the item is swiped away.
           background: Container(color: Colors.red),
           child: ListTile(
-            leading: Icon(Icons.check_box_outline_blank),
+            leading: (_isTicked
+                ? Icon(Icons.check_box)
+                : Icon(Icons.check_box_outline_blank)),
             title: Text('$todo'),
             trailing: Icon(Icons.edit),
           ),
@@ -87,10 +92,32 @@ class _MyHomePageState extends State<MyHomePage> {
         child: todoListView,
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: addItem,
+        onPressed: _showMaterialDialog,
         tooltip: 'Add ToDo',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  _showMaterialDialog() {
+    showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+              title: Text("ToDo Item"),
+              content: TextField(
+                autofocus: true,
+                decoration: InputDecoration(
+                    border: InputBorder.none, hintText: 'Enter ToDo item'),
+              ),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text('Save'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    addItem();
+                  },
+                )
+              ],
+            ));
   }
 }
