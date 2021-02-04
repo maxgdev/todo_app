@@ -66,6 +66,18 @@ class _MyHomePageState extends State<MyHomePage> {
     super.dispose();
   }
 
+  TextStyle getTextStyle(ticked) {
+    if (ticked) {
+      return TextStyle(
+        decoration: TextDecoration.lineThrough,
+      );
+    } else {
+      return TextStyle(
+        decoration: TextDecoration.none,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // Generate some dummy list for ListView
@@ -95,14 +107,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 icon: (_isTicked
                     ? Icon(Icons.check_box)
                     : Icon(Icons.check_box_outline_blank)),
-                onPressed: () => {
-                  print('icon button pressed'),
-                  toggleToDo()
-                  }),
+                onPressed: () => {print('icon button pressed'), toggleToDo()}),
             // leading: (_isTicked
             //     ? Icon(Icons.check_box)
             //     : Icon(Icons.check_box_outline_blank)),
-            title: Text('$todo'),
+            title: Text(
+              '$todo',
+              style: getTextStyle(_isTicked),
+            ),
             trailing: Icon(Icons.edit),
           ),
         );
