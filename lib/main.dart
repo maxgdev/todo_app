@@ -1,5 +1,5 @@
 // ToDo App
-// import 'dart:html';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -30,29 +30,51 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
+// ToDoItem area ---------------------------
+class ToDoItem {
+  int id;
+  String toDoDetails;
+  bool checked;
+  ToDoItem(this.id, this.toDoDetails, this.checked);
+}
+
+// ToDoItem  area ---------------------------
 class _MyHomePageState extends State<MyHomePage> {
   bool _isTicked = true;
-  final todos = [
-    'Wash Car',
-    'Empty Recycling',
-    'Pay Car Insurance',
-    'Call plumbers',
-    'Get quote for office shed',
-    'Get haircut',
-    'Call family',
-    'Watch Mandalorian',
-  ];
+  final toDoList = [];
+  // final todos = [
+  //   'Wash Car',
+  //   'Empty Recycling',
+  //   'Pay Car Insurance',
+  //   'Call plumbers',
+  //   'Get quote for office shed',
+  //   'Get haircut',
+  //   'Call family',
+  //   'Watch Mandalorian',
+  // ];
 
-  void addItem() {
+  // final todoObjects = [
+  //   {0, 'Wash Car', false},
+  //   {1, 'Empty Recycling', false},
+  //   {2, 'Pay Car Insurance', false},
+  //   {3, 'Call plumbers', false},
+  //   {4, 'Get quote for office shed', false},
+  //   {5, 'Get haircut', false},
+  //   {6, 'Call family', false},
+  //   {7, 'Watch Mandalorian', false},
+  // ];
+
+  // toggle todo checkbox
+  void toggleToDo(checked) {
     setState(() {
-      todos.add(toDoController.text);
+      checked = !checked;
+      print(checked);
     });
   }
 
-  // toggle todo checkbox
-  void toggleToDo() {
+  void addtoDoItem() {
     setState(() {
-      _isTicked = !_isTicked;
+      toDoList.add(toDoController);
     });
   }
 
@@ -80,44 +102,56 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // Generate some dummy list for ListView
-    // final todos = List<String>.generate(10, (i) => "ToDo items $i");
-    print(todos);
+    // Create ToDO Items to test List
+    var t1 = ToDoItem(0, "Wash Car", false);
+    var t2 = ToDoItem(1, "Empty Recycling", false);
+    var t3 = ToDoItem(2, "Pay Car Insurance", false);
+    var t4 = ToDoItem(3, "Call plumbers", false);
+    var t5 = ToDoItem(4, "Get quote for office shed", false);
+    var t6 = ToDoItem(5, "Get haircut", false);
+    var t7 = ToDoItem(6, "Call family", false);
+    var t8 = ToDoItem(7, "Watch Mandalorian", false);
+
+    List toDoList = <ToDoItem>[t1, t2, t3, t4, t5, t6, t7, t8];
+    toDoList.forEach((e) {
+      print("Id: ${e.id} ToDo : ${e.toDoDetails} Checked: ${e.checked}");
+    });
 
     final todoListView = ListView.builder(
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
-      itemCount: todos.length,
+      itemCount: toDoList.length,
       itemBuilder: (context, index) {
-        final todo = todos[index];
+        final todo = toDoList[index];
         return Dismissible(
-          key: Key(todo),
+          key: Key(todo.id.toString()),
           onDismissed: (direction) {
             setState(() {
-              todos.removeAt(index);
+              toDoList.removeAt(index);
             });
             // Then show a snackbar.
             Scaffold.of(context)
-                .showSnackBar(SnackBar(content: Text("$todo deleted!")));
+                .showSnackBar(SnackBar(content: Text("${todo.id} deleted!")));
           },
           // Show a red background as the item is swiped away.
           background: Container(color: Colors.red),
           child: ListTile(
             leading: IconButton(
-                icon: (_isTicked
+                icon: (todo.checked
                     ? Icon(Icons.check_box)
                     : Icon(Icons.check_box_outline_blank)),
-                onPressed: () => {print('icon button pressed'), toggleToDo()}),
+                onPressed: () =>
+                    {print('icon button pressed'), toggleToDo(todo.checked)}),
             // leading: (_isTicked
             //     ? Icon(Icons.check_box)
             //     : Icon(Icons.check_box_outline_blank)),
             title: Text(
-              '$todo',
+              '${todo.toDoDetails}',
               style: getTextStyle(_isTicked),
             ),
             trailing: IconButton(
                 icon: Icon(Icons.edit),
-                onPressed: () => {print('Edit icon button pressed') }),
+                onPressed: () => {print('Edit icon button pressed')}),
           ),
         );
       },
@@ -154,7 +188,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Text('Save'),
                   onPressed: () {
                     Navigator.of(context).pop();
-                    addItem();
+                    addtoDoItem();
                   },
                 )
               ],
