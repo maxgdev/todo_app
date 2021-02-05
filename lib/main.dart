@@ -39,7 +39,7 @@ class ToDoItem {
 // ToDoItem  area ---------------------------
 class _MyHomePageState extends State<MyHomePage> {
   final toDoList = []; // must be 0 at least NOT null
-  
+
   // toggle todo checkbox
   void toggleToDo(todo) {
     setState(() {
@@ -54,6 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
       var newToDo = ToDoItem(newText.text, false);
       toDoList.add(newToDo);
       // print(newText.text);
+      toDoController.text = "";
     });
   }
 
@@ -81,21 +82,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // Create Dummy ToDO Items to test List
-    // var t1 = ToDoItem("1", "Wash Car", false);
-    // var t2 = ToDoItem("2", "Empty Recycling", false);
-    // var t3 = ToDoItem("3", "Pay Car Insurance", false);
-    // var t4 = ToDoItem("4", "Call plumbers", false);
-    // var t5 = ToDoItem("5", "Get quote for office shed", false);
-    // var t6 = ToDoItem("6", "Get haircut", false);
-    // var t7 = ToDoItem("7", "Call family", false);
-    // var t8 = ToDoItem("8", "Watch Mandalorian", false);
-
-    // List toDoList = <ToDoItem>[t1, t2, t3, t4, t5, t6, t7, t8];
-    // toDoList.forEach((e) {
-    //   print("Id: ${e.id} ToDo : ${e.toDoDetails} Checked: ${e.checked}");
-    // });
-
     final todoListView = ListView.builder(
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
@@ -103,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
       itemBuilder: (context, index) {
         final todo = toDoList[index];
         return Dismissible(
-          key: Key(todo.toString()),
+          key: Key(index.toString()),
           onDismissed: (direction) {
             setState(() {
               toDoList.removeAt(index);
@@ -113,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 SnackBar(content: Text("${todo.toDoDetails} deleted!")));
           },
           // Show a red background as the item is swiped away.
-          background: Container(color: Colors.red),
+          background: Container(color: Colors.red[200]),
           child: ListTile(
             leading: IconButton(
                 icon: (todo.checked
@@ -121,9 +107,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     : Icon(Icons.check_box_outline_blank)),
                 onPressed: () =>
                     {print('icon button pressed'), toggleToDo(todo)}),
-            // leading: (_isTicked
-            //     ? Icon(Icons.check_box)
-            //     : Icon(Icons.check_box_outline_blank)),
             title: Text(
               '${todo.toDoDetails}',
               style: getTextStyle(todo.checked),
