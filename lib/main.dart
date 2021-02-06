@@ -82,6 +82,8 @@ class _MyHomePageState extends State<MyHomePage> {
     if (ticked) {
       return TextStyle(
         decoration: TextDecoration.lineThrough,
+        decorationColor: Colors.green,
+        decorationThickness: 3.0,
       );
     } else {
       return TextStyle(
@@ -116,7 +118,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     ? Icon(Icons.check_box)
                     : Icon(Icons.check_box_outline_blank)),
                 onPressed: () =>
-                    {print('icon button pressed'), toggleToDo(todo)}),
+                    {print('icon button pressed'), toggleToDo(todo)},
+                color: todo.checked ? Colors.green : null,        
+            ),
             title: TextField(
               enabled: todo.editable,
               decoration: InputDecoration(
