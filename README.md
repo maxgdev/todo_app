@@ -3,7 +3,7 @@
 Flutter ToDo List project.
 
 ## ToDo
-    <strike>Fix for "A dismissed Dismissible widget is still part of the tree" error</strike>
+    ~~Fix for "A dismissed Dismissible widget is still part of the tree" error~~
     // https://stackoverflow.com/questions/51002775/flutter-dismissible-unique-keys
     // use uuid package
     // https://pub.dev/packages/uuid
