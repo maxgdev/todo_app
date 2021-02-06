@@ -3,18 +3,15 @@
 Flutter ToDo List project.
 
 ## ToDo
-    ~~Fix for "A dismissed Dismissible widget is still part of the tree" error~~
+    [ ] Fix for "A dismissed Dismissible widget is still part of the tree" error
     // https://stackoverflow.com/questions/51002775/flutter-dismissible-unique-keys
     // use uuid package
     // https://pub.dev/packages/uuid
-    <strike>Enable edit icon to form on ListTile</strike>
-    <strike>Add green styling to checkbox and strikethrough</strike>
-    SQLite database and model
-    Connect SQLte to ToDoItem data persistence
+    [ ] Enable edit icon to form on ListTile
+    [ ] Add green styling to checkbox and strikethrough
+    [ ] SQLite database and model
+    [ ] Connect SQLte to ToDoItem data persistence
 
-[ ]This is a test~~
-<strike>[x]This is a test</strike>
-~[ ]This is a test~
 
 ## Getting Started
 
