@@ -12,9 +12,9 @@ Flutter ToDo List project.
     SQLite database and model
     Connect SQLte to ToDoItem data persistence
 
-    ~~This is a test~~
-    <strike>This is a test</strike>
-    ~This is a test~
+    ~~[ ]This is a test~~
+    <strike>[x]This is a test</strike>
+    ~[ ]This is a test~
 
 ## Getting Started
 
