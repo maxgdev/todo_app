@@ -1,14 +1,14 @@
 // ToDo App
 import 'package:flutter/material.dart';
-// import 'dart:async';
-// import './sqlite_db.dart';
-import 'package:path/path.dart';
-// import 'package:sqflite/sqflite.dart';
 
 void main() {
   runApp(MyApp());
 }
+// -----------------------------------------
+// SQLite Database
 
+
+// -----------------------------------------
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -118,11 +118,12 @@ class _MyHomePageState extends State<MyHomePage> {
           background: Container(color: Colors.red[200]),
           child: ListTile(
             leading: IconButton(
-              icon: (todo.checked
-                  ? Icon(Icons.check_box)
-                  : Icon(Icons.check_box_outline_blank)),
-              onPressed: () => {print('icon button pressed'), toggleToDo(todo)},
-              color: todo.checked ? Colors.green : null,
+                icon: (todo.checked
+                    ? Icon(Icons.check_box)
+                    : Icon(Icons.check_box_outline_blank)),
+                onPressed: () =>
+                    {print('icon button pressed'), toggleToDo(todo)},
+                color: todo.checked ? Colors.green : null,        
             ),
             title: TextField(
               enabled: todo.editable,
@@ -159,7 +160,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   _showMaterialDialog() {
-    showDialog( 
+    showDialog(
         context: context,
         builder: (_) => AlertDialog(
               title: Text("ToDo Item"),
