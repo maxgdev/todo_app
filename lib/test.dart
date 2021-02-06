@@ -102,7 +102,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-Wash car
 
     final todoListView = ListView.builder(
       scrollDirection: Axis.vertical,
@@ -180,5 +179,38 @@ Wash car
                 )
               ],
             ));
+  }
+}
+class ListItem extends StatefulWidget {
+  @override
+  _ListItemState createState() => _ListItemState();
+}
+
+class _ListItemState extends State<ListItem> {
+  bool _isEnabled = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: TextField(
+        enabled: _isEnabled,
+        decoration: InputDecoration(
+          hintText: 'Enter a text',
+        ),
+      ),
+
+      // The icon button which will notify list item to change
+      trailing: GestureDetector(
+        child: new Icon(
+          Icons.edit,
+          color: Colors.black,
+        ),
+        onTap: () {
+          setState((){
+            _isEnabled = !_isEnabled;
+          });
+        },
+      ),
+    );
   }
 }

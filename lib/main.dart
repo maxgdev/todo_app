@@ -33,12 +33,14 @@ class MyHomePage extends StatefulWidget {
 class ToDoItem {
   String toDoDetails;
   bool checked;
-  ToDoItem(this.toDoDetails, this.checked);
+  bool editable;
+  ToDoItem(this.toDoDetails, this.checked, this.editable);
 }
 
 // ToDoItem  area ---------------------------
 class _MyHomePageState extends State<MyHomePage> {
   final toDoList = []; // must be 0 at least NOT null
+  // bool _editEnabled = false;
 
   // toggle todo checkbox
   void toggleToDo(todo) {
@@ -48,10 +50,18 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  // toggle editable icon
+  void toggleEdit(todo) {
+    setState(() {
+      todo.editable = !todo.editable;
+      print(todo.editable);
+    });
+  }
+
   void addtoDoItem() {
     setState(() {
       var newText = toDoController;
-      var newToDo = ToDoItem(newText.text, false);
+      var newToDo = ToDoItem(newText.text, false, false);
       toDoList.add(newToDo);
       // print(newText.text);
       toDoController.text = "";
@@ -107,13 +117,20 @@ class _MyHomePageState extends State<MyHomePage> {
                     : Icon(Icons.check_box_outline_blank)),
                 onPressed: () =>
                     {print('icon button pressed'), toggleToDo(todo)}),
-            title: Text(
-              '${todo.toDoDetails}',
+            title: TextField(
+              enabled: todo.editable,
+              decoration: InputDecoration(
+                hintText: '${todo.toDoDetails}',
+              ),
               style: getTextStyle(todo.checked),
             ),
             trailing: IconButton(
                 icon: Icon(Icons.edit),
-                onPressed: () => {print('Edit icon button pressed')}),
+                onPressed: () => {
+                      toggleEdit(todo),
+                      print(
+                          'Edit icon button pressed. Edit enabled: $todo.editable')
+                    }),
           ),
         );
       },
