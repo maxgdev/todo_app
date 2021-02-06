@@ -11,7 +11,11 @@ Flutter ToDo List project.
     <strike>Add green styling to checkbox and strikethrough</strike>
     SQLite database and model
     Connect SQLte to ToDoItem data persistence
-    
+
+~~This is a test~~
+<strike>This is a test</strike>
+~This is a test~
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
