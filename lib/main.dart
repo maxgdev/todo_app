@@ -1,12 +1,17 @@
 // ToDo App
 import 'package:flutter/material.dart';
+// import 'package:path/path.dart';
 // import 'dart:async';
-// import './sqlite_db.dart';
-import 'package:path/path.dart';
+import 'package:flutter/widgets.dart';
 // import 'package:sqflite/sqflite.dart';
+import './sqlite_db.dart';
+
 
 void main() {
   runApp(MyApp());
+  dummyTest();
+  // sqfDb();
+  
 }
 
 class MyApp extends StatelessWidget {
@@ -66,6 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       var newText = toDoController;
       var newToDo = ToDoItem(newText.text, false, false);
+      // updateToDo(newToDo);
       toDoList.add(newToDo);
       // print(newText.text);
       toDoController.text = "";
@@ -159,7 +165,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   _showMaterialDialog() {
-    showDialog( 
+    showDialog(
         context: context,
         builder: (_) => AlertDialog(
               title: Text("ToDo Item"),
@@ -181,3 +187,30 @@ class _MyHomePageState extends State<MyHomePage> {
             ));
   }
 }
+
+// ------------ToDo Class---------------
+// class ToDo {
+//   final int id;
+//   final String details;
+//   final int checked;
+//   final int editable;
+
+//   ToDo({this.id, this.details, this.checked, this.editable});
+
+//   Map<String, dynamic> toMap() {
+//     return {
+//       'id': id,
+//       'details': details,
+//       'checked': checked,
+//       'editable': editable,
+//     };
+//   }
+
+//   // Implement toString to make it easier to see information about
+//   // each dog when using the print statement.
+//   @override
+//   String toString() {
+//     return 'ToDo{id: $id, details: $details, checked: $checked, editable: $editable}';
+//   }
+// }
+// ------------ToDo Class---------------

@@ -3,10 +3,11 @@ import 'package:flutter/widgets.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-void main() async {
+void sqfDb() async {
   // Avoid errors caused by flutter upgrade.
   // Importing 'package:flutter/widgets.dart' is required.
   WidgetsFlutterBinding.ensureInitialized();
+  
   // Open the database and store the reference.
   final Future<Database> database = openDatabase(
     // Set the path to the database. Note: Using the `join` function from the
@@ -36,6 +37,7 @@ void main() async {
     the boolean (flag) will be false, otherwise it will be true.
   */
 
+  // [C]RUD
   Future<void> insertToDo(ToDo todo) async {
     // Get a reference to the database.
     final Database db = await database;
@@ -50,6 +52,7 @@ void main() async {
     );
   }
 
+  // C[R]UD
   Future<List<ToDo>> todos() async {
     // Get a reference to the database.
     final Database db = await database;
@@ -68,6 +71,7 @@ void main() async {
     });
   }
 
+  // CR[U]D
   Future<void> updateToDo(ToDo todo) async {
     // Get a reference to the database.
     final db = await database;
@@ -83,6 +87,7 @@ void main() async {
     );
   }
 
+  // CRU[D]
   Future<void> deleteToDo(int id) async {
     // Get a reference to the database.
     final db = await database;
@@ -107,7 +112,7 @@ void main() async {
   // Insert a dog into the database.
   await insertToDo(todo1);
 
-// Insert todo1 entry
+  // Insert todo1 entry
   var todo2 = ToDo(
     id: 1,
     details: 'Re-new Insurance quote',
@@ -141,6 +146,7 @@ void main() async {
   print(await todos());
 }
 
+// ------------ToDo Class---------------
 class ToDo {
   final int id;
   final String details;
@@ -164,4 +170,10 @@ class ToDo {
   String toString() {
     return 'ToDo{id: $id, details: $details, checked: $checked, editable: $editable}';
   }
+}
+// ------------ToDo Class---------------
+
+void dummyTest() {
+  print("This is a function from dummy.dart file");
+  
 }

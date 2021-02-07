@@ -27,7 +27,7 @@ For help getting started with Flutter, view our
 samples, guidance on mobile development, and a full API reference.
 
 ## Create a new repository on the command line
-    echo "# todo_app" >> README.md
+    
     git init
     git .
     git commit -m "first commit..."
